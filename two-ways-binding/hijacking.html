@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>data-binding-method-set</title>
+    <title>data-binding-hijacking</title>
 </head>
 
 <body>
@@ -49,6 +49,9 @@
     }
 
     var bValue;
+    /**
+     * 定义属性设置劫持
+     */
     var defineGetAndSet = function(obj, propName) {
         try {
             Object.defineProperty(obj, propName, {
