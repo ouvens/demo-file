@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>window-name跨域</title>
+</head>
+
+<body>
+    <iframe id="iframe" src="http://localhost/demo/iframe.html" frameborder="0"></iframe>
+    <script>
+    function domainData(url, fn) {
+        var isFirst = true;
+        var iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        var loadfn = function() {
+            if (isFirst) {
+                iframe.contentWindow.location = 'http://localhost/demo/iframe.html';
+                isFirst = false;
+            } else {
+                fn(iframe.contentWindow.name);
+                iframe.contentWindow.document.write('');
+                iframe.contentWindow.close();
+                document.body.removeChild(iframe);
+                iframe.src = '';
+                iframe = null;
+            }
+        };
+        iframe.src = url;
+        if (iframe.attachEvent) {
+            iframe.attachEvent('onload', loadfn);
+        } else {
+            iframe.onload = loadfn;
+        }
+
+        document.body.appendChild(iframe);
+    }
+
+    domainData('http://localhost/demo/iframe.html', function(data) {
+        alert(data);
+    });
+    </script>
+</body>
+
+</html>
