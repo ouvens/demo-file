@@ -122,13 +122,11 @@ Try.init();
 // demo
 // function a(num){
 
-//     aaa;
 //     console.log(num + 1);
 // }
 
 // b = defineError(a);
 // b(2);
-
 
 
 //  打点性能测试
